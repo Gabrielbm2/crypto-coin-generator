@@ -1,0 +1,75 @@
+body {
+    background-color: black;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .container {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #1406d4ef;
+  }
+  
+  .logo {
+    display: block;
+    margin: 0 auto;
+    width: 150px;
+  }
+  
+  h1 {
+    text-align: center;
+    font-size: 28px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+  
+  select {
+    font-size: 18px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+  
+  button {
+    font-size: 18px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #000000;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #000000;
+  }
+  
+  .like-dislike {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .like-dislike label {
+    margin-right: 10px;
+    font-size: 18px;
+  }
+
+fieldset {
+    border: 2px solid #444;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+  }

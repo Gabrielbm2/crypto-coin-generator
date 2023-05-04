@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Minha API de Votação</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header>
+      <div class="logo-wrapper">
+        <img src="logo.png" alt="Logo da minha API de votação">
+      </div>
+      <h1 style="color: #848eff;">Qual é a sua criptomoeda favorita?</h1>
+    </header>
+    <div class="container">
+      <h1>Qual é a sua criptomoeda favorita?</h1>
+      <form>
+        <fieldset>
+          <legend>Selecione uma opção:</legend>
+          <select id="criptomoedas">
+            <option value="">-- Selecione uma criptomoeda --</option>
+            <option value="btc">Bitcoin</option>
+            <option value="eth">Ethereum</option>
+            <option value="ltc">Litecoin</option>
+          </select>
+        </fieldset>
+        <fieldset>
+          <legend>Voto:</legend>
+          <label>
+            <input type="radio" name="voto" value="gostei">
+            Like
+          </label>
+          <label>
+            <input type="radio" name="voto" value="nao-gostei">
+            Dislike
+          </label>
+        </fieldset>
+        <button type="submit" id="enviar">Enviar</button>
+      </form>
+    </div>
+  </body>
+</html>
