@@ -1,16 +1,28 @@
 package db
 
 import (
-	"database/sql"
+	"context"
+	"fmt"
+	"os"
 
-	_ "github.com/lib/pq"
+	"github.com/jackc/pgx/v5"
 )
 
-func ConectaComBancoDeDados() *sql.DB {
-	conexao := "user=postgres dbname=Vote_crypto password=gbm158545 host=localhost sslmode=disable"
-	db, err := sql.Open("postgres", conexao)
-	if err != nil {
-		panic(err.Error())
+var db *pgx.Conn
+
+func GetDatabase() *pgx.Conn {
+	if db == nil {
+		Connect()
 	}
 	return db
+}
+
+func Connect() {
+	conn, err := pgx.Connect(context.Background(), os.Getenv("DATABASE_URL"))
+
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
+		os.Exit(1)
+	}
+	db = conn
 }

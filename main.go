@@ -1,33 +1,41 @@
 package main
 
 import (
-	"database/sql"
 	"desafioKlever/models"
 	"desafioKlever/routes"
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
-	"github.com/gorilla/mux"
+	"github.com/go-chi/chi/v5"
+	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 )
 
 func main() {
-	db, err := sql.Open("postgres", "host=localhost port=5432 user=postgres password=gbm158545 dbname=Vote_crypto sslmode=disable")
+	err := godotenv.Load()
 	if err != nil {
-		log.Fatalf("Erro ao conectar ao banco de dados: %v", err)
-	}
-	defer db.Close()
-
-	if err := db.Ping(); err != nil {
-		log.Fatalf("Erro ao pingar o banco de dados: %v", err)
+		log.Fatal("Error loading .env file")
 	}
 
-	models.InitDB("user=postgres password=gbm158545 dbname=Vote_crypto host=localhost port=5432 sslmode=disable")
+	models.CreateCryptoTable()
+	models.CreateVotesTable()
 
-	r := mux.NewRouter()
-	routes.CarregaRotas(r)
+	r := chi.NewRouter()
+	routes.LoadRoutes(r)
 
-	fmt.Println("Servidor rodando em http://localhost:8000")
-	log.Fatal(http.ListenAndServe(":8000", r))
+	host := os.Getenv("API_HOST")
+	port := os.Getenv("API_PORT")
+
+	address := fmt.Sprintf("%s:%s", host, port)
+
+	srv := &http.Server{
+		Handler: r,
+		Addr:    address,
+	}
+
+	fmt.Printf("Servidor rodando em %v", address)
+	log.Fatal(srv.ListenAndServe())
+
 }
