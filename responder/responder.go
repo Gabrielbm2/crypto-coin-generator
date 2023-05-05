@@ -19,7 +19,6 @@ func JSON(res http.ResponseWriter, req *http.Request, v interface{}, status int)
 	res.Header().Set("Content-Type", "application/json")
 	res.Header().Set("Content-Length", strconv.Itoa(buf.Len()))
 
-	// Just in case
 	if status == 0 {
 		res.WriteHeader(http.StatusOK)
 	} else {

@@ -6,7 +6,7 @@ import (
 	"fmt"
 )
 
-type ReturnVote struct {
+type ReturnVotes struct {
 	Likes    int `json:"likes"`
 	Dislikes int `json:"dislikes"`
 }
