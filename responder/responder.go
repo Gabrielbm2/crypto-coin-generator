@@ -8,9 +8,6 @@ import (
 	"strconv"
 )
 
-// JSON writes the given response as JSON. It will respond with 200 OK, unless
-// an optional status code is provided.
-// func (r *Responder) JSON(res http.ResponseWriter, req *http.Request, v interface{}, status ...int) {
 func JSON(res http.ResponseWriter, req *http.Request, v interface{}, status int) {
 	buf := &bytes.Buffer{}
 	enc := json.NewEncoder(buf)
