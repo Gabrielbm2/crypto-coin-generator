@@ -15,8 +15,10 @@ func LoadRoutes(r *chi.Mux) {
 	r.Post("/crypto/{cryptoID}/like", controllers.Like)
 	r.Post("/crypto/{cryptoID}/dislike", controllers.Dislike)
 
-	r.Get("/crypto/{cryptoID}", controllers.ReturnVotes)
+	r.Get("/crypto/{cryptoID}", controllers.GetCrypto)
 	r.Get("/crypto/{cryptoID}/votes", controllers.GetVotes)
-	r.Get("/crypto", controllers.CreateCrypto)
+
+	r.Post("/crypto", controllers.CreateCrypto)
+	r.Get("/crypto", controllers.GetCryptos)
 
 }

@@ -44,3 +44,23 @@ func GetVotes(cryptoID string) (*models.Votes, error) {
 
 	return votos, nil
 }
+
+func GetCryptoWithVotesByID(cryptoID string) (*models.CryptoWithVotesPayload, error) {
+	payload := &models.CryptoWithVotesPayload{}
+	crypto, err := GetCrypto(cryptoID)
+	if err != nil {
+		return nil, err
+	}
+
+	payload.ID = crypto.Id
+	payload.Name = crypto.Name
+
+	votes, err := GetVotes(cryptoID)
+	if err != nil {
+		return nil, err
+	}
+	payload.Likes = votes.Likes
+	payload.Dislikes = votes.Dislikes
+
+	return payload, nil
+}

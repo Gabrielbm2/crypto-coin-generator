@@ -36,7 +36,7 @@ func Dislike(w http.ResponseWriter, r *http.Request) {
 func GetVotes(w http.ResponseWriter, r *http.Request) {
 	cryptoID := chi.URLParam(r, "cryptoID")
 
-	votes, err := services.GetVotes(cryptoID)
+	votes, err := services.GetCryptoWithVotesByID(cryptoID)
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)

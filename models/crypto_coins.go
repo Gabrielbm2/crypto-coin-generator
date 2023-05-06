@@ -11,6 +11,29 @@ type Crypto struct {
 	Name string `json:"name"`
 }
 
+// DTOS
+type CryptoPayload struct {
+	Id   string `json:"id"`
+	Name string `json:"name"`
+}
+type CryptoWithVotesPayload struct {
+	ID       string `json:"id"`
+	Name     string `json:"name"`
+	Likes    int    `json:"likes"`
+	Dislikes int    `json:"dislikes"`
+}
+type CryptosWithVotesPayload struct {
+	Cryptos []CryptosWithVotesPayload `json:"cryptos"`
+}
+type CryptosPayload struct {
+	Cryptos []Crypto `json:"cryptos"`
+}
+
+type CreateCryptoPayload struct {
+	ID   string `json:"id"`
+	Name string `json:"name"`
+}
+
 func CreateCryptoTable() error {
 	sql := `
 		CREATE TABLE if not exists "crypto_coins" (
