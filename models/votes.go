@@ -11,6 +11,12 @@ type Votes struct {
 	Dislikes int `json:"dislikes"`
 }
 
+// DTOS
+type VotesPayload struct {
+	Likes    int `json:"likes"`
+	Dislikes int `json:"dislikes"`
+}
+
 func CreateVotesTable() error {
 	sql := `
 	CREATE TABLE IF NOT EXISTS "votes" (
