@@ -9,6 +9,7 @@ import (
 	"github.com/go-chi/chi/v5"
 )
 
+// TEST
 func TestGetCrypto(t *testing.T) {
 	req := httptest.NewRequest("GET", "/crypto/1", nil)
 
