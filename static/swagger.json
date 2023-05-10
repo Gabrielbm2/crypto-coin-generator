@@ -13,22 +13,11 @@
         "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
       }
     },
-    "tags": [
-      {
-        "name": "Votes",
-        "description": "Votos para as crypto moedas"
-      },
-      {
-        "name": "Crypto",
-        "description": "Operações relacionadas às criptomoedas"
-      }
-    ],
     "schemes": [
       "https",
       "http"
     ],
     "paths": {
-        "/crypto": {
           "get": {
             "tags": [
               "/crypto/cryptoID"
@@ -44,7 +33,6 @@
                         "$ref": "#/definitions/CryptoOutput"
                     }
                       }
-                  }
               },
               "500": {
                 "description": "Erro interno no servidor"
