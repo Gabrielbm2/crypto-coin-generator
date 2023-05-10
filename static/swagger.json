@@ -18,12 +18,66 @@
       "http"
     ],
     "paths": {
-          "get": {
-            "tags": [
-              "/crypto/cryptoID"
+      "/crypto": {
+        "get":{
+        "tags":["Crypto"], 
+        "summary": "Lista de cryptos cadastradas",
+        "description": "Retorna uma lista com as cryptos cadastradas na plataforma",
+        "responses": {
+          "200": {
+            "description": "Operação bem sucedida",
+            "content":{
+                "application/json":{
+                  "schema":{
+                    "$ref": "#/definitions/CryptosOutput"
+                  } 
+                }
+              }
+          },
+          "500": {
+            "description": "Erro interno no servidor"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Crypto"
+        ],
+        "summary": "Cadastrar crypto",
+        "description": "Cadastra uma nova crypto na plataforma",
+        "requestBody":{
+            "required": true,
+            "content":{
+              "application/json":{
+                "schema":{
+                  "$ref": "#/definitions/CryptoInput"}
+                }
+            }
+        },
+        "responses": {
+            "201": {
+              "description": "Operação bem sucedida"
+            },
+            "400": {
+              "description": "Entrada inválida"
+            },
+            "409": {
+              "description": "Voto já cadastrado"
+            },
+            "500": {
+              "description": "Erro interno no servidor"
+            }
+          }
+      }
+    },
+        "/crypto/{cryptoID}": {
+            "parameters":[
+              {"in":"path","name":"cryptoID", "type":"string","description":"ID da crypto."}
             ],
-            "summary": "Lista de criptomoedas cadastradas",
-            "description": "Retorna uma lista com as criptomoedas cadastradas na plataforma",
+            "get":{
+            "tags":["Crypto"], 
+            "summary": "Lista de cryptos cadastradas",
+            "description": "Retorna uma lista com as cryptos cadastradas na plataforma",
             "responses": {
               "200": {
                 "description": "Operação bem sucedida",
@@ -31,101 +85,77 @@
                     "application/json":{
                       "schema":{
                         "$ref": "#/definitions/CryptoOutput"
+                      } 
                     }
-                      }
+                  }
               },
               "500": {
                 "description": "Erro interno no servidor"
               }
             }
-          },
-          "post": {
-            "tags": [
-              "/crypto/cryptoID"
-            ],
-            "summary": "Cadastrar criptomoeda",
-            "description": "Cadastra uma nova criptomoeda na plataforma",
-            "requestBody":{
-                "required": true,
-                "content":{
-                  "application/json":{
-                    "schema":{
-                      "$ref": "#/definitions/CryptoInput"}
-                    }
-                }
-            },
-            "responses": {
-                "201": {
-                  "description": "Operação bem sucedida"
-                },
-                "400": {
-                  "description": "Entrada inválida"
-                },
-                "409": {
-                  "description": "Voto já cadastrado"
-                },
-                "500": {
-                  "description": "Erro interno no servidor"
-                }
-              }
           }
         },
-        "/votes": {
+        "/crypto/{cryptoID}/votes": {
+          "parameters":[
+            {"in":"path","name":"cryptoID", "type":"string","description":"ID da crypto."}
+          ],
           "get": {
             "tags": [
-              "crypto/cryptoID/votes"
+              "Votes"
             ],
             "summary": "Lista de votos cadastrados",
-            "description": "Retorna uma lista com os votos cadastrados na plataforma",
-            "requestBody":{
-                "required": true,
-                "content":{
-                  "application/json":{
-                    "schema":{
-                      "$ref": "#/definitions/VoteOutput"}
-                    }
-                }
-            },
+            "description": "Retorna contagem de votos cadastrados na crypto",
             "responses": {
               "200": {
                 "description": "Operação bem sucedida",
-                "schema": {
-                  "type": "array"
-
-                }
-              },
+                "content":{
+                    "application/json":{
+                      "schema":{
+                        "$ref": "#/definitions/VoteOutput"
+                      } 
+                    }
+                  }
+                },
               "500": {
                 "description": "Erro interno no servidor"
               }
             }
-          },
+          }
+        },
+        "/crypto/{cryptoID}/like": {
+          "parameters":[
+            {"in":"path","name":"cryptoID", "type":"string","description":"ID da crypto."}
+          ],
           "post": {
             "tags": [
               "Votes"
             ],
-            "summary": "Cadastrar voto",
-            "description": "Cadastra um novo voto na plataforma",
-            "parameters": [
-              {
-                "name": "vote",
-                "in": "body",
-                "description": "Dar like ou dislike",
-                "required": true,
-                "schema": {
-                  "$ref": "#/definitions/VoteInput"
-                }
-              }
-            ],
+            "summary": "Gostar de uma crypto",
+            "description": "Registra um Like em uma crypto",
             "responses": {
               "201": {
                 "description": "Operação bem sucedida"
-              },
-              "400": {
-                "description": "Entrada inválida"
-              },
-              "409": {
-                "description": "Voto já cadastrado"
-              },
+                },
+              "500": {
+                "description": "Erro interno no servidor"
+              }
+            }
+          }
+        },
+        "/crypto/{cryptoID}/dislike": {
+          "parameters":[
+            {"in":"path","name":"cryptoID", "type":"string","description":"ID da crypto."}
+          ],
+          "post": {
+            "tags": [
+              "Votes"
+            ],
+            "summary": "Nao Gostar de uma crypto",
+            "description": "Registra um Dislike em uma crypto",
+            "responses": {
+              "201": {
+                "description": "Operação bem sucedida"
+                },
               "500": {
                 "description": "Erro interno no servidor"
               }
@@ -133,20 +163,18 @@
           }
         }
       },
-      
-    
       "definitions": {
         "CryptoInput": {
             "type": "object",
             "properties": {
                 "name": {
                     "type": "string",
-                    "description": "Nome da criptomoeda",
+                    "description": "Nome da crypto",
                     "example": "Klever"
                 },
-                "ID": {
+                "id": {
                     "type": "string",
-                    "description": "Símbolo da criptomoeda",
+                    "description": "Símbolo da crypto",
                     "example": "KLV"
                 }
             }
@@ -154,25 +182,31 @@
         "CryptoOutput": {
             "type": "object",
             "properties": {
-                "ID": {
+                "id": {
                     "type": "string",
-                    "description": "Identificador único da criptomoeda"
+                    "description": "Identificador único da crypto"
                 },
                 "name": {
                     "type": "string",
-                    "description": "Nome da criptomoeda"
+                    "description": "Nome da crypto"
                 }
             }
         },
+        "CryptosOutput": {
+          "type": "array",
+          "items":{
+            "$ref": "#/definitions/CryptoOutput"
+          }
+      },
         "VoteInput": {
             "type": "object",
             "properties": {
-                "like": {
+                "likes": {
                     "type": "boolean",
                     "description": "Voto de like = true",
                     "example": "1"
                 },
-                "lislike": {
+                "dislikes": {
                     "type": "integer",
                     "description": "Voto de dislike = false",
                     "example": "1"
@@ -184,17 +218,17 @@
             "properties": {
                 "id": {
                     "type": "string",
-                    "description": "ID da criptomoeda votada"
+                    "description": "ID da crypto votada"
                 },
                 "name": {
                     "type": "string",
-                    "description": "Nome da criptomoeda votada"
+                    "description": "Nome da crypto votada"
                 },
                 "likes": {
                     "type": "integer",
                     "description": "Indica a quantidade de Likes"
                 },
-                "Dislikes": {
+                "dislikes": {
                     "type": "integer",
                     "description": "Indica a quantidade de Dislikes"
                 }

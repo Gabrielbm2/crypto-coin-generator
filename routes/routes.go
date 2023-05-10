@@ -12,14 +12,13 @@ func LoadRoutes(r *chi.Mux) {
 		w.Write([]byte("pong"))
 	})
 
+	r.Get("/crypto", controllers.GetCryptos)
+	r.Post("/crypto", controllers.CreateCrypto)
+	r.Get("/crypto/{cryptoID}", controllers.GetCrypto)
+
+	r.Get("/crypto/{cryptoID}/votes", controllers.GetVotes)
 	r.Post("/crypto/{cryptoID}/like", controllers.Like)
 	r.Post("/crypto/{cryptoID}/dislike", controllers.Dislike)
-
-	r.Get("/crypto/{cryptoID}", controllers.GetCrypto)
-	r.Get("/crypto/{cryptoID}/votes", controllers.GetVotes)
-
-	r.Post("/crypto", controllers.CreateCrypto)
-	r.Get("/crypto", controllers.GetCryptos)
 
 	// Docs
 	fs := http.FileServer(http.Dir("static"))
