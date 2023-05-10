@@ -1,0 +1,223 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "description": "Essa é uma API para cadastrar, listar e votar em Crypto moedas",
+      "version": "1.0.0",
+      "title": "Desafio Klever - API de votação de criptomoedas",
+      "termsOfService": "http://swagger.io/terms/",
+      "contact": {
+        "email": "gabribmeireles@hotmail.com"
+      },
+      "license": {
+        "name": "Apache 2.0",
+        "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+      }
+    },
+    "tags": [
+      {
+        "name": "Votes",
+        "description": "Votos para as crypto moedas"
+      },
+      {
+        "name": "Crypto",
+        "description": "Operações relacionadas às criptomoedas"
+      }
+    ],
+    "schemes": [
+      "https",
+      "http"
+    ],
+    "paths": {
+        "/crypto": {
+          "get": {
+            "tags": [
+              "/crypto/cryptoID"
+            ],
+            "summary": "Lista de criptomoedas cadastradas",
+            "description": "Retorna uma lista com as criptomoedas cadastradas na plataforma",
+            "responses": {
+              "200": {
+                "description": "Operação bem sucedida",
+                "content":{
+                    "application/json":{
+                      "schema":{
+                        "$ref": "#/definitions/CryptoOutput"
+                    }
+                      }
+                  }
+              },
+              "500": {
+                "description": "Erro interno no servidor"
+              }
+            }
+          },
+          "post": {
+            "tags": [
+              "/crypto/cryptoID"
+            ],
+            "summary": "Cadastrar criptomoeda",
+            "description": "Cadastra uma nova criptomoeda na plataforma",
+            "requestBody":{
+                "required": true,
+                "content":{
+                  "application/json":{
+                    "schema":{
+                      "$ref": "#/definitions/CryptoInput"}
+                    }
+                }
+            },
+            "responses": {
+                "201": {
+                  "description": "Operação bem sucedida"
+                },
+                "400": {
+                  "description": "Entrada inválida"
+                },
+                "409": {
+                  "description": "Voto já cadastrado"
+                },
+                "500": {
+                  "description": "Erro interno no servidor"
+                }
+              }
+          }
+        },
+        "/votes": {
+          "get": {
+            "tags": [
+              "crypto/cryptoID/votes"
+            ],
+            "summary": "Lista de votos cadastrados",
+            "description": "Retorna uma lista com os votos cadastrados na plataforma",
+            "requestBody":{
+                "required": true,
+                "content":{
+                  "application/json":{
+                    "schema":{
+                      "$ref": "#/definitions/VoteOutput"}
+                    }
+                }
+            },
+            "responses": {
+              "200": {
+                "description": "Operação bem sucedida",
+                "schema": {
+                  "type": "array"
+
+                }
+              },
+              "500": {
+                "description": "Erro interno no servidor"
+              }
+            }
+          },
+          "post": {
+            "tags": [
+              "Votes"
+            ],
+            "summary": "Cadastrar voto",
+            "description": "Cadastra um novo voto na plataforma",
+            "parameters": [
+              {
+                "name": "vote",
+                "in": "body",
+                "description": "Dar like ou dislike",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/VoteInput"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "Operação bem sucedida"
+              },
+              "400": {
+                "description": "Entrada inválida"
+              },
+              "409": {
+                "description": "Voto já cadastrado"
+              },
+              "500": {
+                "description": "Erro interno no servidor"
+              }
+            }
+          }
+        }
+      },
+      
+    
+      "definitions": {
+        "CryptoInput": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Nome da criptomoeda",
+                    "example": "Klever"
+                },
+                "ID": {
+                    "type": "string",
+                    "description": "Símbolo da criptomoeda",
+                    "example": "KLV"
+                }
+            }
+        },
+        "CryptoOutput": {
+            "type": "object",
+            "properties": {
+                "ID": {
+                    "type": "string",
+                    "description": "Identificador único da criptomoeda"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Nome da criptomoeda"
+                }
+            }
+        },
+        "VoteInput": {
+            "type": "object",
+            "properties": {
+                "like": {
+                    "type": "boolean",
+                    "description": "Voto de like = true",
+                    "example": "1"
+                },
+                "lislike": {
+                    "type": "integer",
+                    "description": "Voto de dislike = false",
+                    "example": "1"
+                }
+            }
+        },
+        "VoteOutput": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "ID da criptomoeda votada"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Nome da criptomoeda votada"
+                },
+                "likes": {
+                    "type": "integer",
+                    "description": "Indica a quantidade de Likes"
+                },
+                "Dislikes": {
+                    "type": "integer",
+                    "description": "Indica a quantidade de Dislikes"
+                }
+            }
+        }
+    }
+}    
+            
+            
+            
+            
+            
+            
+            

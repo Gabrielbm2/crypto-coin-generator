@@ -21,4 +21,8 @@ func LoadRoutes(r *chi.Mux) {
 	r.Post("/crypto", controllers.CreateCrypto)
 	r.Get("/crypto", controllers.GetCryptos)
 
+	// Docs
+	fs := http.FileServer(http.Dir("static"))
+	r.Handle("/static/*", http.StripPrefix("/static/", fs))
+
 }

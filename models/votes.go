@@ -11,6 +11,12 @@ type Votes struct {
 	Dislikes int `json:"dislikes"`
 }
 
+type VoteInfo struct {
+	VoteType   int    `json:"voteType"`
+	CryptoID   int    `json:"cryptoID"`
+	CryptoName string `json:"cryptoName"`
+}
+
 // DTOS
 type VotesPayload struct {
 	Likes    int `json:"likes"`
