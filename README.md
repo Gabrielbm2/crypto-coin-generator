@@ -4,8 +4,6 @@ Este projeto apresenta uma API para votação de criptomoedas, que permite aos u
 
 ### Funcionalidades
 
-* A API permite as seguintes funcionalidades:
-
 * Criação de votos para as criptomoedas existentes
 
 * Adição de novas criptomoedas para serem votadas
