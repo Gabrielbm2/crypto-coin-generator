@@ -9,6 +9,7 @@ import (
 	"github.com/go-chi/chi/v5"
 )
 
+// Função que testa like
 func TestLike(t *testing.T) {
 	req := httptest.NewRequest("POST", "/crypto/1/vote/like", nil)
 
@@ -24,6 +25,7 @@ func TestLike(t *testing.T) {
 	}
 }
 
+// Função que testa dislike
 func TestDislike(t *testing.T) {
 	req := httptest.NewRequest("POST", "/crypto/1/dislike", nil)
 
@@ -39,6 +41,7 @@ func TestDislike(t *testing.T) {
 	}
 }
 
+// Função que testa a quantidade de votos de uma crypto
 func TestGetVotes(t *testing.T) {
 	req := httptest.NewRequest("GET", "/votes/1", nil)
 
@@ -49,7 +52,7 @@ func TestGetVotes(t *testing.T) {
 	w := httptest.NewRecorder()
 	GetVotes(w, req)
 
-	expectedResponse := `{"id":"1","name":"Bitcoin","votes":10}`
+	expectedResponse := `{"id":"1","name":"Klever","votes":10}`
 	if w.Body.String() != expectedResponse {
 		t.Errorf("Resposta incorreta. Esperado: %s. Obtido: %s", expectedResponse, w.Body.String())
 	}

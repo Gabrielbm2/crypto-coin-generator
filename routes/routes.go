@@ -7,6 +7,8 @@ import (
 	"github.com/go-chi/chi/v5"
 )
 
+//O package "routes" define as rotas (endpoints) da aplicação, mapeando cada uma para a função correspondente em "controllers" e incluindo também uma rota para servir arquivos estáticos.
+
 func LoadRoutes(r *chi.Mux) {
 	r.Get("/ping", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("pong"))

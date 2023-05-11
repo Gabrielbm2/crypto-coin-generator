@@ -7,6 +7,8 @@ import (
 	"fmt"
 )
 
+//Esse package "services" define funções para interagir com a camada de dados relacionada às criptomoedas, incluindo GetCrypto para obter informações sobre uma criptomoeda por ID, CreateCrypto para criar uma nova criptomoeda e GetAllCryptos para obter todas as criptomoedas armazenadas no banco de dados. As funções usam o pacote db para se comunicar com o banco de dados.
+
 func GetCrypto(id string) (*models.Crypto, error) {
 	db := db.GetDatabase()
 

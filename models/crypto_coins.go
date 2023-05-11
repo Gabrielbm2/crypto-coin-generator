@@ -6,6 +6,8 @@ import (
 	"fmt"
 )
 
+//Esse package "models" define a estrutura de dados para a entidade Crypto e suas variações, como CryptoPayload e CryptoWithVotesPayload, além de incluir funções para criar a tabela "crypto_coins" no banco de dados.
+
 type Crypto struct {
 	Id   string `json:"id"`
 	Name string `json:"name"`

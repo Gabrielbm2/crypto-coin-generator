@@ -13,6 +13,8 @@ import (
 	_ "github.com/lib/pq"
 )
 
+//Esse é o package principal do projeto, que contém a função main() que é executada quando o programa é iniciado. Ele carrega as configurações do arquivo .env, cria as tabelas do banco de dados e inicia o servidor HTTP, definindo o endereço de IP e porta que serão usados para atender às requisições. Além disso, ele também carrega as rotas do projeto utilizando o roteador chi e define o tratamento de erros caso o servidor falhe em iniciar.
+
 func main() {
 	err := godotenv.Load()
 	if err != nil {

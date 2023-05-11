@@ -6,6 +6,8 @@ import (
 	"fmt"
 )
 
+//Esse package models define as estruturas de dados que são usadas no sistema, incluindo Crypto e Votes. Ele também inclui algumas estruturas DTO (Data Transfer Objects) para representar esses dados em diferentes contextos, como CryptoPayload e VotesPayload. Além disso, o pacote também contém funções para criar tabelas no banco de dados, como CreateCryptoTable e CreateVotesTable.
+
 type Votes struct {
 	Likes    int `json:"likes"`
 	Dislikes int `json:"dislikes"`

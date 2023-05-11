@@ -8,6 +8,8 @@ import (
 	"strconv"
 )
 
+// O package "responder" contém uma função JSON que é responsável por serializar dados em formato JSON e enviá-los como resposta HTTP. Essa função é usada para encapsular o processo de serialização de JSON e garantir que a resposta HTTP seja configurada corretamente.
+
 func JSON(res http.ResponseWriter, req *http.Request, v interface{}, status int) {
 	buf := &bytes.Buffer{}
 	enc := json.NewEncoder(buf)

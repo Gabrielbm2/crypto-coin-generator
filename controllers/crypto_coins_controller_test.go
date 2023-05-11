@@ -12,7 +12,7 @@ import (
 	"github.com/go-chi/chi/v5"
 )
 
-// TEST
+// Essa função é responsável por testar a funcionalidade de busca de uma criptomoeda específica através do seu ID.
 func TestGetCrypto(t *testing.T) {
 	req := httptest.NewRequest("GET", "/crypto/1", nil)
 
@@ -33,6 +33,7 @@ func TestGetCrypto(t *testing.T) {
 	}
 }
 
+// Função para testar criação de crypto moedas
 func TestCreateCrypto(t *testing.T) {
 	// Cria uma nova criptomoeda
 	crypto := models.CreateCryptoPayload{
@@ -40,13 +41,10 @@ func TestCreateCrypto(t *testing.T) {
 		Name: "Klever",
 	}
 
-	// Codifica a criptomoeda em JSON
 	jsonCrypto, _ := json.Marshal(crypto)
 
-	// Cria um reader com os dados codificados em JSON
 	reader := bytes.NewReader(jsonCrypto)
 
-	// Cria um novo request com o reader como corpo
 	req := httptest.NewRequest("POST", "/crypto", reader)
 
 	w := httptest.NewRecorder()
@@ -57,6 +55,7 @@ func TestCreateCrypto(t *testing.T) {
 	}
 }
 
+// Essa função de teste verifica que ela esta retornando corretamente uma lista de criptomoedas cadastradas no sistema
 func TestGetCryptos(t *testing.T) {
 	req := httptest.NewRequest("GET", "/cryptos", nil)
 	w := httptest.NewRecorder()
