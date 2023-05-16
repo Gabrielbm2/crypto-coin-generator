@@ -44,4 +44,4 @@ A API foi implantada na Amazon Web Services (AWS) usando o serviço Elastic Comp
 
 ### Considerações Finais
 
-Este projeto foi desenvolvido com a intenção de demonstrar as habilidades de programação em Go do autor. Qualquer dúvida ou sugestão pode ser encaminhada por email para gabribmeireles@hotmail.com.
+Este projeto foi desenvolvido com a intenção de demonstrar as habilidades de programação em Go. Qualquer dúvida ou sugestão pode ser encaminhada por email para gabribmeireles@hotmail.com.
